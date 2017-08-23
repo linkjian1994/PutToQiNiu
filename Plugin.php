@@ -43,13 +43,13 @@ class PutToQiNiu_Plugin implements Typecho_Plugin_Interface
      */
     public static function activate()
     {
-        $handles = [
+        $handles = array(
             'uploadHandle', // 上传
             'modifyHandle', // 更改
             'deleteHandle', // 删除
             'attachmentDataHandle',// 获取文件路径
             'attachmentHandle' // 获取文件内容
-        ];
+        );
         foreach ($handles as $handle) {
             Typecho_Plugin::factory('Widget_Upload')->$handle = array(__CLASS__, $handle);
         }
@@ -77,37 +77,37 @@ class PutToQiNiu_Plugin implements Typecho_Plugin_Interface
      */
     public static function config(Typecho_Widget_Helper_Form $form)
     {
-        $configs = [
-            [
+        $configs = array(
+            array(
                 'field' => 'accessKey',
-                'rules' => [
-                    ['rule' => 'required','msg' => '请填写AccessKey']
-                ],
+                'rules' => array(
+                    array('rule' => 'required','msg' => '请填写AccessKey')
+                ),
                 'form' => 'AccessKey'
-            ],
-            [
+            ),
+            array(
                 'field' => 'secretKey',
-                'rules' =>  [
-                    ['rule' => 'required','msg' => '请填写SecretKey']
-                ],
+                'rules' =>  array(
+                    array('rule' => 'required','msg' => '请填写SecretKey')
+                ),
                 'form' => 'SecretKey'
-            ],
-            [
+            ),
+            array(
                 'field' => 'bucket',
-                'rules' =>  [
-                    ['rule' =>'required','msg' => '请填写Bucket']
-                ],
+                'rules' =>  array(
+                    array('rule' =>'required','msg' => '请填写Bucket')
+                ),
                 'form' => 'Bucket'
-            ],
-            [
+            ),
+            array(
                 'field' => 'domain',
-                'rules' =>  [
-                    ['rule' =>'required','msg' => '请填写绑定域名'],
-                    ['rule' =>'url','msg' => '域名格式不正确']
-                ],
+                'rules' =>  array(
+                    array('rule' =>'required','msg' => '请填写绑定域名'),
+                    array('rule' =>'url','msg' => '域名格式不正确')
+                ),
                 'form' => '绑定域名'
-            ],
-        ];
+            ),
+        );
         foreach ($configs as $config) {
             $input = new Typecho_Widget_Helper_Form_Element_Text($config['field'],NULL,NULL, _t($config['form']));
             foreach ($config['rules'] as $rule) {
@@ -214,7 +214,7 @@ class PutToQiNiu_Plugin implements Typecho_Plugin_Interface
         //返回相对存储路径
         return array(
             'name' => $oldFile['attachment']->name,
-            'path' =>$oldFile['attachment']->path,
+            'path' => $oldFile['attachment']->path,
             'size' => $newFile['size'],
             'type' => $oldFile['attachment']->type,
             'mime' => $oldFile['attachment']->mime
